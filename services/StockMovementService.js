@@ -50,7 +50,8 @@ exports.getMovementsService = async(page,limit,search,type,startDate,endDate,mak
             ],
             where: whereCondition,
             offset,
-            limit
+            limit,
+            order: [['createdAt','DESC']]
         });
         const total = await StockMovement.count({
             where: whereCondition

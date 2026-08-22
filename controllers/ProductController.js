@@ -57,7 +57,7 @@ exports.create = async(req,res) => {
 exports.update = async(req,res) => {
     try{
         const id = req.params.id;
-        const allowedFields = ["name", "price", 'description', 'minimumStock', 'unitId', 'categoryId'];
+        const allowedFields = ["name", "price", 'description', 'productCode','minimumStock', 'unitId', 'categoryId'];
         const updateData = {};
         allowedFields.forEach(field => {
             if(req.body[field] !== undefined){

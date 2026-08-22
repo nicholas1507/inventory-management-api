@@ -2,10 +2,10 @@ const {approvedRequestService, cancelRequestService,rejectRequestService, create
 
 exports.getStockRequests = async(req,res) => {
     try{
-        const page = parseInt(req.body.page) || 1;
-        const limit = parseInt(req.body.limit) || 10;
-        const search = (req.body.search || "").trim();
-        const status = req.body.status;
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 10;
+        const search = (req.query.search || "").trim();
+        const status = req.query.status;
         const offset = (page - 1) * limit;
         const result = await getStockRequestsService(page,limit,search,offset,status);
         res.status(200).json({

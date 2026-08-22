@@ -5,7 +5,7 @@ const authorize = require('../middleware/authorize');
 
 requestRoute.use(auth);
 // Without authorize
-requestRoute.post('/list', requestController.getStockRequests);
+requestRoute.get('/list', requestController.getStockRequests);
 requestRoute.get('/:id', requestController.getRequestById);
 requestRoute.patch('/:id/cancel', requestController.cancelRequest);
 requestRoute.post('/', requestController.createRequest);

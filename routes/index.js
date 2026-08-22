@@ -9,6 +9,7 @@ const supplierRoutes = require('./supplier');
 const movementRoutes = require('./movementRoutes');
 const requestRoutes = require('./requestRoutes');
 const unitRoutes = require('./unit');
+const dashboardRoutes = require('./dashboardRoutes');
 
 routes.get('/', (req,res) => {
     res.json({message: `Hello web_Inventory`})
@@ -24,5 +25,6 @@ routes.use('/suppliers', supplierRoutes);
 routes.use('/movements', movementRoutes);
 routes.use('/requests', requestRoutes);
 routes.use('/units', unitRoutes);
+routes.use('/dashboards', dashboardRoutes);
 
 module.exports = routes;

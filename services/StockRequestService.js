@@ -47,7 +47,8 @@ exports.getStockRequestsService = async(page,limit,search,offset,status) => {
             ],
             where: whereCondition,
             offset,
-            limit
+            limit,
+            order: [['createdAt','DESC']]
         });
         const total = await StockRequest.count({
             include: [

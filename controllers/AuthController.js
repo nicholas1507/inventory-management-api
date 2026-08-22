@@ -15,7 +15,10 @@ exports.register = async(req,res) => {
         await acc.setRoles([userRole.id]);
         res.status(201).json({id: acc.id, name: acc.name, email: acc.email});
     }catch(err){
-        res.status(500).json(err);
+        console.error(err)
+        res.status(500).json({
+            message: err
+        });
     }
 }
 exports.login = async(req,res) => {

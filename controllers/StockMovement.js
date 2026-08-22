@@ -2,13 +2,13 @@ const {createMovementService, getMovementsService, userActivityService} = requir
 
 exports.getMovements = async(req,res) => {
     try{
-        const page = parseInt(req.body.page) || 1;
-        const limit = parseInt(req.body.limit) || 10;
-        const search = (req.body.search || "").trim();
-        const type = req.body.type;
-        const startDate = new Date(req.body.startDate);
-        const endDate = new Date(req.body.endDate);
-        const maker = req.body.maker;
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 10;
+        const search = (req.query.search || "").trim();
+        const type = req.query.type;
+        const startDate = new Date(req.query.startDate);
+        const endDate = new Date(req.query.endDate);
+        const maker = req.query.maker;
         const offset = (page - 1) * limit;
         const isUser = (req.user.roles).includes("User");
         const result = await getMovementsService(page,limit,search,type,startDate,endDate,maker,offset,isUser);

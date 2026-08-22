@@ -13,6 +13,14 @@ const Product = sequelize.define('Product',{
     imagePublicId: {type: DataTypes.STRING, allowNull: false},
     unitId: {type: DataTypes.INTEGER, allowNull: false},
     categoryId: {type: DataTypes.INTEGER, allowNull: false}
-},{tableName: 'products', timestamps: true});
+},{tableName: 'products', 
+    timestamps: true,
+    indexes: [
+        {
+            name: "index_lowStock_alert",
+            fields: ['stock','minimumStock']
+        },
+    ]
+});
 
 module.exports = Product;
