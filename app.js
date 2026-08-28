@@ -14,30 +14,6 @@ app.use(express.urlencoded({extended: true}));
 const routes = require('./routes');
 app.use(routes);
 
-// const seedUsers = async() => {
-//     try{
-//         const count = await User.count();
-//         if(count === 0){
-//             const bcrypt = require('bcrypt');
-//             const hashedPassword = await bcrypt.hash("Business17", 10);
-//             await User.bulkCreate([
-//                 {
-//                     name: "Super Admin",
-//                     email: "Superadmin@super.com",
-//                     password: hashedPassword
-//                 },
-//                 {
-//                     name: "Admin",
-//                     email: "admin1@admin.com",
-//                     password: hashedPassword
-//                 }
-//             ]);
-//             console.log("Default users created successfully!");
-//         } 
-//     }catch(error){
-//         console.error("Seeding error: ", error);
-//     }
-// }
 // const seedRoles = async() => {
 //     try{
 //         const count = await Role.count();
@@ -59,11 +35,42 @@ app.use(routes);
 //         console.error("Errorrr");
 //     }
 // }
+
+
+// const seedUsersAndRoles = async () => {
+//     try {
+//         const userCount = await User.count();
+//         if (userCount === 0) {
+//             const superAdminUser = await User.create({
+//                 name: "Super Admin",
+//                 email: "superadmin@gmail.com",
+//                 password: await require('bcrypt').hash("business17", 10)
+//             });
+
+//             const adminUser = await User.create({
+//                 name: "Admin",
+//                 email: "admin@gmail.com",
+//                 password: await require('bcrypt').hash("business17", 10)
+//             });
+
+//             const superAdminRole = await Role.findOne({ where: { name: "Super Admin" } });
+//             const adminRole = await Role.findOne({ where: { name: "Admin" } });
+
+//             if (superAdminRole) await superAdminUser.addRole(superAdminRole);
+//             if (adminRole) await adminUser.addRole(adminRole);
+
+//             console.log("Default users and their roles created successfully!");
+//         }
+//     } catch (error) {
+//         console.error("Seeding error: ", error);
+//     }
+// };
+
 sequelize.sync({alter: true})
     .then( () => {
         console.log(`Database Synced`)
-        // seedUsers();
         // seedRoles();
+        // seedUsersAndRoles();
         app.listen(port, () => {
             console.log(`App listening on port ${port}`)
         })
